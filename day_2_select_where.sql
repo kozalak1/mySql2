@@ -61,3 +61,88 @@ Or ile belirtilen şartlardan en az biri gerçekleşiyorsa o kayıt listelenir,
 şartlardan hiçbiri gerçekleşmiyorsa o kayıt listelenmez.
 SELECT * FROM matematik WHERE sinav1 < 50 OR sinav2 < 50
 Bu örnekte sınav1 veya sınav2 alanı 50'den küçük olan kayıtlar listelenecektir.=========*/
+
+/* -----------------------------------------------------------------------------
+  ORNEK4: 
+  personelin bilgilerini listele
+ -----------------------------------------------------------------------------*/  
+-- 1. yol
+select * from personel where id between '10002' and '10005';
+-- 2. yol
+select * from personel where id>='10002' and id<='10005'; 
+
+/* -----------------------------------------------------------------------------
+  ORNEK5: ismi Mehmet Yılmaz ile Veli Han arasındaki olan personel bilgilerini 
+  listeleyiniz. personelin bilgilerini listele
+ -----------------------------------------------------------------------------*/  
+ select * from personel where isim between 'Mehmet Yılmaz' and 'Veli Han';
+ 
+ /* ======================= SELECT - IN ======================================
+    IN birden fazla mantıksal ifade ile tanımlayabileceğimiz durumları 
+    tek komutla yazabilme imkânı verir
+    SYNTAX:
+    -------
+    SELECT sutun1,sutun2, ...
+    FROM tablo_adı
+    WHERE sutun_adı IN (deger1, deger2, ...);
+/* ========================================================================== */
+    
+/* -----------------------------------------------------------------------------
+  ORNEK7: id’si 10001,10002 ve 10004 olan personelin bilgilerini listele
+ -----------------------------------------------------------------------------*/   
+ -- 1. yol
+ select * from personel
+ where id='10001' or id='10002' or id='10004';
+  -- 2. yol
+  select * from personel
+ where id in (10001, 10002, 10004);
+ 
+ /*  -----------------------------------------------------------------------------
+  ORNEK8: Maaşı sadece 7000  veya 12000 olan personelin bilgilerini listele
+-----------------------------------------------------------------------------*/   
+select * from personel
+where maas in (7000, 12000);
+
+/* ======================= SELECT - LIKE ======================================
+    NOT:LIKE anahtar kelimesi, sorgulama yaparken belirli patternleri 
+    kullanabilmemize olanak sağlar.
+    SYNTAX:
+    -------
+    SELECT sutün1, sutün2,…
+    FROM  tablo_adı WHERE sütunN LIKE pattern
+    
+    PATTERN İÇİN
+    -------------
+    %    ---> 0 veya daha fazla karakteri belirtir. 
+    _    ---> Tek bir karakteri temsil eder.(tek alt cizgi)
+        
+/* ========================================================================== */
+-- ORNEK 9 : ismi A harfi ile baslayanlari listele.
+
+select * from personel
+where isim like 'a%'; 
+-- a harfi le baslayan butun isimleri(SINIRSIZ) getir demektir.
+
+-- ORNEK 10 : ismi n harfi ile biten butun isimleri listele.
+SELECT * FROM PERSONEL
+WHERE isim like '%n';
+ 
+ SELECT * FROM PERSONEL
+ where isim like '_e%';
+ 
+ select * from personel
+ where isim like '_e%y%';
+
+ -- ORNEK 15 : isminde a harfi olmayanlari listele.
+ select * from personel
+ where isim not like '%a%';
+ /* -----------------------------------------------------------------------------
+  ORNEK18: maaşı 5 haneli olanları listeleyiniz
+ -----------------------------------------------------------------------------*/
+ select * from personel
+ where maas like '_____';
+ /* -----------------------------------------------------------------------------
+  ORNEK20: 1. harfi A ve 7.harfi A olan perspneli listeleyiniz.
+ -----------------------------------------------------------------------------*/
+ select * from personel
+ where isim like 'a_____a%';
